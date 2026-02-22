@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { StrictMode, useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
 
 /* ─── Glass utility ─── */
 const glass = (a = 0.09, b = 28) => ({
@@ -339,7 +340,7 @@ const NewsSection = () => {
                             <a
                                 href={news[0].link}
                                 target="_blank"
-                                rel="noreferrer"
+                                rel="noreferrer noopener"
                                 style={{
                                     display: "inline-flex",
                                     alignItems: "center",
@@ -352,7 +353,13 @@ const NewsSection = () => {
                                     paddingBottom: 1,
                                 }}
                             >
-                                ↗ github.com/shvde12/dotfiles
+                                ↗ {(() => {
+                                    try {
+                                        return new URL(news[0].link).hostname;
+                                    } catch {
+                                        return "Link";
+                                    }
+                                })()}
                             </a>
                         )}
                     </div>
@@ -396,8 +403,8 @@ const NewsSection = () => {
                         animation: "fadeSlide 0.35s ease",
                     }}
                 >
-                    {news.slice(1).map((n, i) => (
-                        <GlassCard key={i} hover={false} style={{ padding: "18px 22px" }}>
+                    {news.slice(1).map((n) => (
+                        <GlassCard key={n.title} hover={false} style={{ padding: "18px 22px" }}>
                             <div
                                 style={{
                                     display: "flex",
@@ -571,10 +578,10 @@ const AboutSection = () => {
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
                 {socials.map((s, i) => (
                     <a
-                        key={i}
+                        key={s.name}
                         href={s.href}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noreferrer noopener"
                         onMouseEnter={() => setHovSocial(i)}
                         onMouseLeave={() => setHovSocial(null)}
                         style={{
@@ -640,14 +647,8 @@ const ProjectsSection = () => {
                 Projects
             </h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {projects.map((p, i) => (
-                    <a
-                        key={i}
-                        href={p.href || "#"}
-                        target={p.href ? "_blank" : "_self"}
-                        rel="noreferrer"
-                        style={{ textDecoration: "none" }}
-                    >
+                {projects.map((p) => {
+                    const card = (
                         <GlassCard style={{ padding: "22px 26px 20px" }}>
                             <div style={{ display: "flex", alignItems: "flex-start", gap: 18 }}>
                                 <span
@@ -739,8 +740,21 @@ const ProjectsSection = () => {
                                 )}
                             </div>
                         </GlassCard>
-                    </a>
-                ))}
+                    );
+                    return p.href ? (
+                        <a
+                            key={p.num}
+                            href={p.href}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            style={{ textDecoration: "none" }}
+                        >
+                            {card}
+                        </a>
+                    ) : (
+                        <div key={p.num}>{card}</div>
+                    );
+                })}
             </div>
         </section>
     );
@@ -758,10 +772,15 @@ const SupportSection = () => {
             address: "0x9BfC91F305ef73Ccf0626e86FA71353337bC11d1",
         },
     ];
-    const copy = (addr, i) => {
-        navigator.clipboard.writeText(addr);
-        setCopied(i);
-        setTimeout(() => setCopied(null), 2000);
+    const copy = async (addr, i) => {
+        try {
+            await navigator.clipboard.writeText(addr);
+            setCopied(i);
+            setTimeout(() => setCopied(null), 2000);
+        } catch {
+            setCopied({ error: i });
+            setTimeout(() => setCopied(null), 2000);
+        }
     };
     return (
         <section>
@@ -790,7 +809,7 @@ const SupportSection = () => {
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {wallets.map((w, i) => (
                     <GlassCard
-                        key={i}
+                        key={w.address}
                         onClick={() => copy(w.address, i)}
                         style={{ padding: "18px 22px" }}
                     >
@@ -851,7 +870,7 @@ const SupportSection = () => {
                                 style={{
                                     flexShrink: 0,
                                     background:
-                                        copied === i
+                                        copied === i || copied?.error === i
                                             ? "rgba(255,255,255,0.15)"
                                             : "rgba(255,255,255,0.06)",
                                     border: "1px solid rgba(255,255,255,0.14)",
@@ -859,13 +878,13 @@ const SupportSection = () => {
                                     padding: "8px 16px",
                                     fontFamily: "-apple-system, sans-serif",
                                     fontSize: "0.8rem",
-                                    color: copied === i ? "#fff" : "rgba(255,255,255,0.4)",
+                                    color: copied === i || copied?.error === i ? "#fff" : "rgba(255,255,255,0.4)",
                                     transition: "all 0.3s ease",
                                     minWidth: 70,
                                     textAlign: "center",
                                 }}
                             >
-                                {copied === i ? "✓ Copied" : "Copy"}
+                                {copied === i ? "✓ Copied" : copied?.error === i ? "Unavailable" : "Copy"}
                             </div>
                         </div>
                     </GlassCard>
@@ -1016,5 +1035,15 @@ export default function App() {
         }
       `}</style>
         </div>
+    );
+}
+
+const el = document.getElementById("root");
+if (el) {
+    const root = createRoot(el);
+    root.render(
+        <StrictMode>
+            <App />
+        </StrictMode>
     );
 }
