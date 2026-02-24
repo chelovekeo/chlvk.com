@@ -260,10 +260,6 @@ const NewsSection = () => {
                     </p>
                 </div>
             </GlassCard>
-            <style>{`
-        @keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(255,255,255,0.8)}50%{opacity:0.4;box-shadow:0 0 3px rgba(255,255,255,0.25)}}
-        @keyframes fadeSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-      `}</style>
         </section>
     );
 };
@@ -837,7 +833,7 @@ export default function App() {
 
             <style>{`
         *{box-sizing:border-box;margin:0;padding:0}
-        html,body{margin:0;background:#080809}
+        html,body{margin:0;background:#080809;scroll-behavior:smooth}
         @keyframes avatarGlow{
           0%,100%{box-shadow:0 0 40px rgba(255,255,255,0.08),inset 0 1px 0 rgba(255,255,255,0.3)}
           50%{box-shadow:0 0 60px rgba(255,255,255,0.14),inset 0 1px 0 rgba(255,255,255,0.4)}
