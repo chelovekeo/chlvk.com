@@ -125,7 +125,7 @@ const Nav = ({ active, setActive }) => {
         <nav
             style={{
                 position: "fixed",
-                top: 20,
+                top: 26,
                 left: "50%",
                 transform: "translateX(-50%)",
                 zIndex: 1000,
@@ -212,25 +212,6 @@ const Marquee = () => {
 
 /* ─── NEWS ─── */
 const NewsSection = () => {
-    const [showOlder, setShowOlder] = useState(false);
-    const news = [
-        {
-            title: "Created Dotfiles Repository",
-            body: "Published my personal system config.",
-            date: "Oct 21, 2025",
-            link: "https://github.com/shvde12/dotfiles",
-        },
-        {
-            title: "Mentor AI Released",
-            body: "Similarity-based AI mentor that evaluates question-answer relevance with lightweight NLP.",
-            date: "Oct 20, 2025",
-        },
-        {
-            title: "Launch of chlvk.com",
-            body: "Portfolio website chlvk.com is now live.",
-            date: "Oct 8, 2025",
-        },
-    ];
     return (
         <section style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 4 }}>
@@ -246,19 +227,6 @@ const NewsSection = () => {
                 >
                     Latest News
                 </h2>
-                <span
-                    style={{
-                        ...glass(0.1, 16),
-                        borderRadius: 100,
-                        padding: "3px 12px",
-                        fontSize: "0.7rem",
-                        fontWeight: 600,
-                        color: "rgba(255,255,255,0.4)",
-                        letterSpacing: "0.08em",
-                    }}
-                >
-                    3 UPDATES
-                </span>
             </div>
 
             <GlassCard hover={false} style={{ padding: "22px 26px" }}>
@@ -276,180 +244,22 @@ const NewsSection = () => {
                 />
                 <div
                     style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        gap: 16,
-                        flexWrap: "wrap",
+                        paddingTop: 10,
                     }}
                 >
-                    <div style={{ flex: 1 }}>
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 9,
-                                marginBottom: 8,
-                            }}
-                        >
-                            <span
-                                style={{
-                                    width: 7,
-                                    height: 7,
-                                    borderRadius: "50%",
-                                    background: "#fff",
-                                    boxShadow: "0 0 8px rgba(255,255,255,0.8)",
-                                    display: "inline-block",
-                                    animation: "livePulse 2s ease-in-out infinite",
-                                }}
-                            />
-                            <span
-                                style={{
-                                    fontSize: "0.68rem",
-                                    fontWeight: 700,
-                                    color: "rgba(255,255,255,0.4)",
-                                    letterSpacing: "0.12em",
-                                    textTransform: "uppercase",
-                                }}
-                            >
-                                Latest
-                            </span>
-                        </div>
-                        <h3
-                            style={{
-                                fontFamily: "-apple-system, sans-serif",
-                                fontSize: "1.1rem",
-                                fontWeight: 600,
-                                color: "#fff",
-                                margin: "0 0 8px",
-                            }}
-                        >
-                            {news[0].title}
-                        </h3>
-                        <p
-                            style={{
-                                color: "rgba(255,255,255,0.52)",
-                                fontSize: "0.875rem",
-                                lineHeight: 1.6,
-                                margin: 0,
-                            }}
-                        >
-                            {news[0].body}
-                        </p>
-                        {news[0].link && (
-                            <a
-                                href={news[0].link}
-                                target="_blank"
-                                rel="noreferrer noopener"
-                                style={{
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    gap: 5,
-                                    marginTop: 11,
-                                    color: "rgba(255,255,255,0.65)",
-                                    fontSize: "0.8rem",
-                                    textDecoration: "none",
-                                    borderBottom: "1px solid rgba(255,255,255,0.2)",
-                                    paddingBottom: 1,
-                                }}
-                            >
-                                ↗ {(() => {
-                                    try {
-                                        return new URL(news[0].link).hostname;
-                                    } catch {
-                                        return "Link";
-                                    }
-                                })()}
-                            </a>
-                        )}
-                    </div>
-                    <span
+                    <p
                         style={{
-                            color: "rgba(255,255,255,0.25)",
-                            fontSize: "0.78rem",
-                            whiteSpace: "nowrap",
-                            marginTop: 2,
+                            color: "rgba(255,255,255,0.52)",
+                            fontSize: "0.9rem",
+                            lineHeight: 1.7,
+                            margin: 0,
                         }}
                     >
-                        {news[0].date}
-                    </span>
+                        No public updates just yet. New launches, tools, and experiments will appear
+                        here as they go live.
+                    </p>
                 </div>
             </GlassCard>
-
-            <button
-                onClick={() => setShowOlder(!showOlder)}
-                style={{
-                    alignSelf: "flex-start",
-                    ...glass(0.07, 16),
-                    borderRadius: 100,
-                    padding: "10px 22px",
-                    fontFamily: "-apple-system, sans-serif",
-                    fontSize: "0.82rem",
-                    color: "rgba(255,255,255,0.55)",
-                    cursor: "pointer",
-                    letterSpacing: "0.02em",
-                    transition: "all 0.3s ease",
-                }}
-            >
-                {showOlder ? "↑ Collapse" : "↓ Older news"}
-            </button>
-
-            {showOlder && (
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 10,
-                        animation: "fadeSlide 0.35s ease",
-                    }}
-                >
-                    {news.slice(1).map((n) => (
-                        <GlassCard key={n.title} hover={false} style={{ padding: "18px 22px" }}>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "flex-start",
-                                    gap: 12,
-                                }}
-                            >
-                                <div>
-                                    <h3
-                                        style={{
-                                            fontFamily: "-apple-system, sans-serif",
-                                            fontSize: "0.975rem",
-                                            fontWeight: 600,
-                                            color: "rgba(255,255,255,0.82)",
-                                            margin: "0 0 5px",
-                                        }}
-                                    >
-                                        {n.title}
-                                    </h3>
-                                    <p
-                                        style={{
-                                            color: "rgba(255,255,255,0.42)",
-                                            fontSize: "0.84rem",
-                                            margin: 0,
-                                            lineHeight: 1.5,
-                                        }}
-                                    >
-                                        {n.body}
-                                    </p>
-                                </div>
-                                <span
-                                    style={{
-                                        color: "rgba(255,255,255,0.22)",
-                                        fontSize: "0.75rem",
-                                        whiteSpace: "nowrap",
-                                    }}
-                                >
-                                    {n.date}
-                                </span>
-                            </div>
-                        </GlassCard>
-                    ))}
-                </div>
-            )}
             <style>{`
         @keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(255,255,255,0.8)}50%{opacity:0.4;box-shadow:0 0 3px rgba(255,255,255,0.25)}}
         @keyframes fadeSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
@@ -477,12 +287,12 @@ const AboutSection = () => {
         },
         {
             name: "Telegram",
-            href: "https://t.me/shvde12",
+            href: "https://t.me/srytn",
             style: { background: "#0088cc", border: "2px solid transparent" },
         },
         {
             name: "GitHub",
-            href: "https://github.com/shvde12",
+            href: "https://github.com/chelovekeo",
             style: { background: "#1a1a1a", border: "2px solid rgba(255,255,255,0.15)" },
         },
     ];
@@ -527,8 +337,10 @@ const AboutSection = () => {
                         maxWidth: 520,
                     }}
                 >
-                    Multidisciplinary creator focused on clean visuals, functional design, and
-                    digital experiences. Let's connect and build something memorable.
+                    Independent engineer and designer building lean digital products, interfaces,
+                    and tools. I care about clear systems, fast performance, and details that make
+                    products feel trustworthy. Currently exploring small utilities, automation, and
+                    visual experiments around productivity.
                 </p>
                 <div
                     style={{
@@ -630,6 +442,14 @@ const ProjectsSection = () => {
             href: null,
             tags: ["React", "Design", "Web"],
             num: "02",
+        },
+        {
+            title: "Taskflow",
+            desc: "Telegram bot for structuring and tracking tasks in compact flows.",
+            date: "Jan 2, 2026",
+            href: null,
+            tags: ["Telegram bot", "Productivity"],
+            num: "03",
         },
     ];
     return (
@@ -937,7 +757,7 @@ export default function App() {
                     zIndex: 1,
                     maxWidth: 680,
                     margin: "0 auto",
-                    padding: "110px 20px 80px",
+                    padding: "102px 20px 72px",
                     minHeight: "100vh",
                     display: "flex",
                     flexDirection: "column",
@@ -1013,17 +833,6 @@ export default function App() {
                     {sections[active]}
                 </div>
 
-                <footer
-                    style={{
-                        marginTop: 60,
-                        textAlign: "center",
-                        color: "rgba(255,255,255,0.13)",
-                        fontSize: "0.75rem",
-                        letterSpacing: "0.08em",
-                    }}
-                >
-                    © 2025 chlvk
-                </footer>
             </main>
 
             <style>{`
