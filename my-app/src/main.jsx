@@ -127,9 +127,11 @@ const Nav = ({ active, setActive }) => {
             style={{
                 zIndex: 1000,
                 display: "flex",
-                gap: 2,
-                padding: "5px 6px",
+                gap: 4,
+                padding: "6px 8px",
                 borderRadius: 100,
+                justifyContent: "center",
+                flexWrap: "wrap",
                 ...glass(0.12, 40),
             }}
         >
@@ -290,8 +292,8 @@ const AboutSection = () => {
         },
     ];
     const stats = [
-        { label: "Projects", val: "2+" },
-        { label: "Repos", val: "4+" },
+        { label: "Focus", val: "Products" },
+        { label: "Discipline", val: "Design + Code" },
         { label: "Since", val: "2025" },
     ];
     return (
@@ -308,7 +310,7 @@ const AboutSection = () => {
             >
                 About Me
             </h2>
-            <GlassCard hover={false} style={{ padding: "28px 30px", marginBottom: 16 }}>
+            <GlassCard hover={false} style={{ padding: "22px 24px 20px", marginBottom: 16 }}>
                 <div
                     style={{
                         position: "absolute",
@@ -321,20 +323,61 @@ const AboutSection = () => {
                         borderRadius: "20px 20px 0 0",
                     }}
                 />
-                <p
+                <div
                     style={{
-                        color: "rgba(255,255,255,0.58)",
-                        fontSize: "1.02rem",
-                        lineHeight: 1.75,
-                        margin: "0 0 24px",
-                        maxWidth: 520,
+                        display: "grid",
+                        gridTemplateColumns: "minmax(0,1.1fr) minmax(0,1.1fr)",
+                        gap: 14,
+                        margin: "6px 0 18px",
                     }}
                 >
-                    Independent engineer and designer building lean digital products, interfaces,
-                    and tools. I care about clear systems, fast performance, and details that make
-                    products feel trustworthy. Currently exploring small utilities, automation, and
-                    visual experiments around productivity.
-                </p>
+                    <div>
+                        <div
+                            style={{
+                                fontSize: "0.7rem",
+                                letterSpacing: "0.12em",
+                                textTransform: "uppercase",
+                                color: "rgba(255,255,255,0.45)",
+                                marginBottom: 4,
+                            }}
+                        >
+                            Profile
+                        </div>
+                        <div
+                            style={{
+                                color: "rgba(255,255,255,0.72)",
+                                fontSize: "0.92rem",
+                                lineHeight: 1.6,
+                            }}
+                        >
+                            Independent engineer and designer building lean, minimal products and
+                            tools.
+                        </div>
+                    </div>
+                    <div>
+                        <div
+                            style={{
+                                fontSize: "0.7rem",
+                                letterSpacing: "0.12em",
+                                textTransform: "uppercase",
+                                color: "rgba(255,255,255,0.45)",
+                                marginBottom: 4,
+                            }}
+                        >
+                            What I like
+                        </div>
+                        <div
+                            style={{
+                                color: "rgba(255,255,255,0.72)",
+                                fontSize: "0.92rem",
+                                lineHeight: 1.6,
+                            }}
+                        >
+                            Clear interfaces, predictable systems, fast performance, and small
+                            useful details.
+                        </div>
+                    </div>
+                </div>
                 <div
                     style={{
                         display: "flex",
@@ -430,29 +473,11 @@ const ProjectsSection = ({ onOpenProject }) => {
             githubUrl: null,
         },
         {
-            title: "chlvk.com",
-            desc: "The portfolio you're currently exploring — minimal, fast, design-focused.",
-            date: "Oct 15, 2025",
-            tags: ["React", "Design", "Web"],
-            num: "02",
-            liveUrl: "https://chlvk.com",
-            githubUrl: "https://github.com/chelovekeo/chlvk.com",
-        },
-        {
-            title: "Taskflow",
-            desc: "Telegram bot for structuring and tracking tasks in compact flows.",
-            date: "Jan 2, 2026",
-            tags: ["Telegram bot", "Productivity"],
-            num: "03",
-            liveUrl: null,
-            githubUrl: null,
-        },
-        {
             title: "Frontend collection",
             desc: "Small front-end experiments and site concepts collected in one place.",
             date: "2025",
             tags: ["Frontend", "Archive"],
-            num: "04",
+            num: "02",
             liveUrl: null,
             githubUrl: null,
         },
@@ -461,6 +486,24 @@ const ProjectsSection = ({ onOpenProject }) => {
             desc: "Set of Pascal utilities and early experiments.",
             date: "2018–2020",
             tags: ["Pascal", "Legacy"],
+            num: "03",
+            liveUrl: null,
+            githubUrl: null,
+        },
+        {
+            title: "chlvk.com",
+            desc: "The portfolio you're currently exploring — minimal, fast, design-focused.",
+            date: "Oct 15, 2025",
+            tags: ["React", "Design", "Web"],
+            num: "04",
+            liveUrl: "https://chlvk.com",
+            githubUrl: "https://github.com/chelovekeo/chlvk.com",
+        },
+        {
+            title: "Taskflow",
+            desc: "Telegram bot for structuring and tracking tasks in compact flows.",
+            date: "Jan 2, 2026",
+            tags: ["Telegram bot", "Productivity"],
             num: "05",
             liveUrl: null,
             githubUrl: null,
@@ -487,81 +530,107 @@ const ProjectsSection = ({ onOpenProject }) => {
                             style={{ padding: "22px 26px 20px" }}
                             onClick={() => onOpenProject && onOpenProject(p)}
                         >
-                            <div style={{ display: "flex", alignItems: "flex-start", gap: 18 }}>
-                                <span
-                                    style={{
-                                        fontFamily: "-apple-system, sans-serif",
-                                        fontSize: "0.68rem",
-                                        fontWeight: 700,
-                                        color: "rgba(255,255,255,0.18)",
-                                        letterSpacing: "0.1em",
-                                        marginTop: 4,
-                                        flexShrink: 0,
-                                        width: 22,
-                                    }}
-                                >
-                                    {p.num}
-                                </span>
-                                <div style={{ flex: 1 }}>
-                                    <div
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: 14,
+                                }}
+                            >
+                                <div style={{ display: "flex", alignItems: "flex-start", gap: 18 }}>
+                                    <span
                                         style={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "space-between",
-                                            marginBottom: 8,
-                                            flexWrap: "wrap",
-                                            gap: 8,
+                                            fontFamily: "-apple-system, sans-serif",
+                                            fontSize: "0.68rem",
+                                            fontWeight: 700,
+                                            color: "rgba(255,255,255,0.18)",
+                                            letterSpacing: "0.1em",
+                                            marginTop: 4,
+                                            flexShrink: 0,
+                                            width: 22,
                                         }}
                                     >
-                                        <h3
+                                        {p.num}
+                                    </span>
+                                    <div style={{ flex: 1 }}>
+                                        <div
                                             style={{
-                                                fontFamily: "-apple-system, sans-serif",
-                                                fontSize: "1.12rem",
-                                                fontWeight: 700,
-                                                color: "#fff",
-                                                margin: 0,
-                                                letterSpacing: "-0.02em",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-between",
+                                                marginBottom: 8,
+                                                flexWrap: "wrap",
+                                                gap: 8,
                                             }}
                                         >
-                                            {p.title}
-                                        </h3>
-                                        <span
-                                            style={{
-                                                color: "rgba(255,255,255,0.2)",
-                                                fontSize: "0.75rem",
-                                            }}
-                                        >
-                                            {p.date}
-                                        </span>
-                                    </div>
-                                    <p
-                                        style={{
-                                            color: "rgba(255,255,255,0.48)",
-                                            fontSize: "0.875rem",
-                                            lineHeight: 1.6,
-                                            margin: "0 0 14px",
-                                        }}
-                                    >
-                                        {p.desc}
-                                    </p>
-                                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                                        {p.tags.map((t) => (
-                                            <span
-                                                key={t}
+                                            <h3
                                                 style={{
-                                                    ...glass(0.1, 10),
-                                                    borderRadius: 100,
-                                                    padding: "3px 11px",
-                                                    fontSize: "0.68rem",
-                                                    fontWeight: 600,
-                                                    color: "rgba(255,255,255,0.5)",
-                                                    letterSpacing: "0.04em",
+                                                    fontFamily: "-apple-system, sans-serif",
+                                                    fontSize: "1.12rem",
+                                                    fontWeight: 700,
+                                                    color: "#fff",
+                                                    margin: 0,
+                                                    letterSpacing: "-0.02em",
                                                 }}
                                             >
-                                                {t}
+                                                {p.title}
+                                            </h3>
+                                            <span
+                                                style={{
+                                                    color: "rgba(255,255,255,0.2)",
+                                                    fontSize: "0.75rem",
+                                                }}
+                                            >
+                                                {p.date}
                                             </span>
-                                        ))}
+                                        </div>
+                                        <p
+                                            style={{
+                                                color: "rgba(255,255,255,0.48)",
+                                                fontSize: "0.875rem",
+                                                lineHeight: 1.6,
+                                                margin: "0 0 14px",
+                                            }}
+                                        >
+                                            {p.desc}
+                                        </p>
+                                        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                                            {p.tags.map((t) => (
+                                                <span
+                                                    key={t}
+                                                    style={{
+                                                        ...glass(0.1, 10),
+                                                        borderRadius: 100,
+                                                        padding: "3px 11px",
+                                                        fontSize: "0.68rem",
+                                                        fontWeight: 600,
+                                                        color: "rgba(255,255,255,0.5)",
+                                                        letterSpacing: "0.04em",
+                                                    }}
+                                                >
+                                                    {t}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
+                                </div>
+                                <div
+                                    style={{
+                                        borderRadius: 14,
+                                        border: "1px solid rgba(255,255,255,0.06)",
+                                        background:
+                                            "radial-gradient(circle at top, rgba(255,255,255,0.055), transparent 60%)",
+                                        height: 140,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        color: "rgba(255,255,255,0.42)",
+                                        fontSize: "0.8rem",
+                                        letterSpacing: "0.06em",
+                                        textTransform: "uppercase",
+                                    }}
+                                >
+                                    Preview video
                                 </div>
                             </div>
                         </GlassCard>
@@ -960,47 +1029,46 @@ export default function App() {
                                     marginTop: 6,
                                 }}
                             >
-                                <a
-                                    href={activeProject.liveUrl || undefined}
-                                    target="_blank"
-                                    rel={activeProject.liveUrl ? "noreferrer noopener" : undefined}
-                                    style={{
-                                        pointerEvents: activeProject.liveUrl ? "auto" : "none",
-                                        opacity: activeProject.liveUrl ? 1 : 0.45,
-                                        padding: "8px 16px",
-                                        borderRadius: 999,
-                                        border: "1px solid rgba(255,255,255,0.35)",
-                                        color: "#fff",
-                                        fontSize: "0.85rem",
-                                        textDecoration: "none",
-                                        fontWeight: 500,
-                                        background:
-                                            "linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03))",
-                                    }}
-                                >
-                                    Visit project
-                                </a>
-                                <a
-                                    href={activeProject.githubUrl || undefined}
-                                    target="_blank"
-                                    rel={
-                                        activeProject.githubUrl ? "noreferrer noopener" : undefined
-                                    }
-                                    style={{
-                                        pointerEvents: activeProject.githubUrl ? "auto" : "none",
-                                        opacity: activeProject.githubUrl ? 1 : 0.45,
-                                        padding: "8px 16px",
-                                        borderRadius: 999,
-                                        border: "1px solid rgba(255,255,255,0.25)",
-                                        color: "rgba(255,255,255,0.9)",
-                                        fontSize: "0.85rem",
-                                        textDecoration: "none",
-                                        fontWeight: 500,
-                                        background: "rgba(0,0,0,0.35)",
-                                    }}
-                                >
-                                    View on GitHub
-                                </a>
+                                {activeProject.liveUrl && (
+                                    <a
+                                        href={activeProject.liveUrl}
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                        style={{
+                                            padding: "8px 16px",
+                                            borderRadius: 999,
+                                            border: "1px solid rgba(255,255,255,0.35)",
+                                            color: "#fff",
+                                            fontSize: "0.85rem",
+                                            textDecoration: "none",
+                                            fontWeight: 500,
+                                            background:
+                                                "linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03))",
+                                        }}
+                                    >
+                                        Visit project
+                                    </a>
+                                )}
+                                {activeProject.githubUrl && (
+                                    <a
+                                        href={activeProject.githubUrl}
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                        style={{
+                                            padding: "8px 20px",
+                                            borderRadius: 999,
+                                            border: "1px solid rgba(255,255,255,0.35)",
+                                            color: "rgba(255,255,255,0.95)",
+                                            fontSize: "0.85rem",
+                                            textDecoration: "none",
+                                            fontWeight: 500,
+                                            background:
+                                                "linear-gradient(135deg, rgba(0,0,0,0.45), rgba(0,0,0,0.7))",
+                                        }}
+                                    >
+                                        View on GitHub
+                                    </a>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -1016,6 +1084,7 @@ export default function App() {
           top:26px;
           left:50%;
           transform:translateX(-50%);
+          max-width: min(100vw - 24px, 480px);
         }
         @media (max-width:720px){
           .nav-pill{
@@ -1023,6 +1092,10 @@ export default function App() {
             bottom:18px;
             left:50%;
             transform:translateX(-50%);
+          }
+          .nav-pill button{
+            padding:7px 12px;
+            font-size:0.78rem;
           }
         }
         @keyframes avatarGlow{
