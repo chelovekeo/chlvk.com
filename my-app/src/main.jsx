@@ -128,7 +128,7 @@ const Nav = ({ active, setActive }) => {
                 zIndex: 1000,
                 display: "flex",
                 gap: 4,
-                padding: "6px 8px",
+                padding: "6px 10px",
                 borderRadius: 100,
                 justifyContent: "center",
                 flexWrap: "wrap",
@@ -292,8 +292,8 @@ const AboutSection = () => {
         },
     ];
     const stats = [
-        { label: "Focus", val: "Products" },
-        { label: "Discipline", val: "Design + Code" },
+        { label: "Projects", val: "2+" },
+        { label: "Repos", val: "4+" },
         { label: "Since", val: "2025" },
     ];
     return (
@@ -310,7 +310,7 @@ const AboutSection = () => {
             >
                 About Me
             </h2>
-            <GlassCard hover={false} style={{ padding: "22px 24px 20px", marginBottom: 16 }}>
+            <GlassCard hover={false} style={{ padding: "28px 30px", marginBottom: 16 }}>
                 <div
                     style={{
                         position: "absolute",
@@ -326,56 +326,50 @@ const AboutSection = () => {
                 <div
                     style={{
                         display: "grid",
-                        gridTemplateColumns: "minmax(0,1.1fr) minmax(0,1.1fr)",
                         gap: 14,
-                        margin: "6px 0 18px",
+                        margin: "0 0 24px",
+                        maxWidth: 520,
                     }}
                 >
-                    <div>
-                        <div
-                            style={{
-                                fontSize: "0.7rem",
-                                letterSpacing: "0.12em",
-                                textTransform: "uppercase",
-                                color: "rgba(255,255,255,0.45)",
-                                marginBottom: 4,
-                            }}
-                        >
-                            Profile
-                        </div>
-                        <div
-                            style={{
-                                color: "rgba(255,255,255,0.72)",
-                                fontSize: "0.92rem",
-                                lineHeight: 1.6,
-                            }}
-                        >
-                            Independent engineer and designer building lean, minimal products and
-                            tools.
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            style={{
-                                fontSize: "0.7rem",
-                                letterSpacing: "0.12em",
-                                textTransform: "uppercase",
-                                color: "rgba(255,255,255,0.45)",
-                                marginBottom: 4,
-                            }}
-                        >
-                            What I like
-                        </div>
-                        <div
-                            style={{
-                                color: "rgba(255,255,255,0.72)",
-                                fontSize: "0.92rem",
-                                lineHeight: 1.6,
-                            }}
-                        >
-                            Clear interfaces, predictable systems, fast performance, and small
-                            useful details.
-                        </div>
+                    <p
+                        style={{
+                            color: "rgba(255,255,255,0.62)",
+                            fontSize: "1.02rem",
+                            lineHeight: 1.7,
+                            margin: 0,
+                        }}
+                    >
+                        I work at the intersection of engineering and design — turning rough ideas
+                        into precise, minimal interfaces and small tools that actually ship.
+                    </p>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            gap: 8,
+                        }}
+                    >
+                        {[
+                            "Product thinking",
+                            "Interface design",
+                            "Fast frontends",
+                            "Small tools & bots",
+                        ].map((item) => (
+                            <span
+                                key={item}
+                                style={{
+                                    ...glass(0.12, 18),
+                                    borderRadius: 999,
+                                    padding: "4px 10px",
+                                    fontSize: "0.75rem",
+                                    color: "rgba(255,255,255,0.7)",
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                }}
+                            >
+                                {item}
+                            </span>
+                        ))}
                     </div>
                 </div>
                 <div
@@ -473,19 +467,19 @@ const ProjectsSection = ({ onOpenProject }) => {
             githubUrl: null,
         },
         {
-            title: "Frontend collection",
-            desc: "Small front-end experiments and site concepts collected in one place.",
-            date: "2025",
-            tags: ["Frontend", "Archive"],
+            title: "Pascal collection",
+            desc: "Set of Pascal utilities and early experiments.",
+            date: "2018–2020",
+            tags: ["Pascal", "Legacy"],
             num: "02",
             liveUrl: null,
             githubUrl: null,
         },
         {
-            title: "Pascal collection",
-            desc: "Set of Pascal utilities and early experiments.",
-            date: "2018–2020",
-            tags: ["Pascal", "Legacy"],
+            title: "Frontend collection",
+            desc: "Small front-end experiments and site concepts collected in one place.",
+            date: "2025",
+            tags: ["Frontend", "Archive"],
             num: "03",
             liveUrl: null,
             githubUrl: null,
@@ -530,107 +524,81 @@ const ProjectsSection = ({ onOpenProject }) => {
                             style={{ padding: "22px 26px 20px" }}
                             onClick={() => onOpenProject && onOpenProject(p)}
                         >
-                            <div
-                                style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: 14,
-                                }}
-                            >
-                                <div style={{ display: "flex", alignItems: "flex-start", gap: 18 }}>
-                                    <span
-                                        style={{
-                                            fontFamily: "-apple-system, sans-serif",
-                                            fontSize: "0.68rem",
-                                            fontWeight: 700,
-                                            color: "rgba(255,255,255,0.18)",
-                                            letterSpacing: "0.1em",
-                                            marginTop: 4,
-                                            flexShrink: 0,
-                                            width: 22,
-                                        }}
-                                    >
-                                        {p.num}
-                                    </span>
-                                    <div style={{ flex: 1 }}>
-                                        <div
-                                            style={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "space-between",
-                                                marginBottom: 8,
-                                                flexWrap: "wrap",
-                                                gap: 8,
-                                            }}
-                                        >
-                                            <h3
-                                                style={{
-                                                    fontFamily: "-apple-system, sans-serif",
-                                                    fontSize: "1.12rem",
-                                                    fontWeight: 700,
-                                                    color: "#fff",
-                                                    margin: 0,
-                                                    letterSpacing: "-0.02em",
-                                                }}
-                                            >
-                                                {p.title}
-                                            </h3>
-                                            <span
-                                                style={{
-                                                    color: "rgba(255,255,255,0.2)",
-                                                    fontSize: "0.75rem",
-                                                }}
-                                            >
-                                                {p.date}
-                                            </span>
-                                        </div>
-                                        <p
-                                            style={{
-                                                color: "rgba(255,255,255,0.48)",
-                                                fontSize: "0.875rem",
-                                                lineHeight: 1.6,
-                                                margin: "0 0 14px",
-                                            }}
-                                        >
-                                            {p.desc}
-                                        </p>
-                                        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                                            {p.tags.map((t) => (
-                                                <span
-                                                    key={t}
-                                                    style={{
-                                                        ...glass(0.1, 10),
-                                                        borderRadius: 100,
-                                                        padding: "3px 11px",
-                                                        fontSize: "0.68rem",
-                                                        fontWeight: 600,
-                                                        color: "rgba(255,255,255,0.5)",
-                                                        letterSpacing: "0.04em",
-                                                    }}
-                                                >
-                                                    {t}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
+                            <div style={{ display: "flex", alignItems: "flex-start", gap: 18 }}>
+                                <span
                                     style={{
-                                        borderRadius: 14,
-                                        border: "1px solid rgba(255,255,255,0.06)",
-                                        background:
-                                            "radial-gradient(circle at top, rgba(255,255,255,0.055), transparent 60%)",
-                                        height: 140,
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        color: "rgba(255,255,255,0.42)",
-                                        fontSize: "0.8rem",
-                                        letterSpacing: "0.06em",
-                                        textTransform: "uppercase",
+                                        fontFamily: "-apple-system, sans-serif",
+                                        fontSize: "0.68rem",
+                                        fontWeight: 700,
+                                        color: "rgba(255,255,255,0.18)",
+                                        letterSpacing: "0.1em",
+                                        marginTop: 4,
+                                        flexShrink: 0,
+                                        width: 22,
                                     }}
                                 >
-                                    Preview video
+                                    {p.num}
+                                </span>
+                                <div style={{ flex: 1 }}>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                            marginBottom: 8,
+                                            flexWrap: "wrap",
+                                            gap: 8,
+                                        }}
+                                    >
+                                        <h3
+                                            style={{
+                                                fontFamily: "-apple-system, sans-serif",
+                                                fontSize: "1.12rem",
+                                                fontWeight: 700,
+                                                color: "#fff",
+                                                margin: 0,
+                                                letterSpacing: "-0.02em",
+                                            }}
+                                        >
+                                            {p.title}
+                                        </h3>
+                                        <span
+                                            style={{
+                                                color: "rgba(255,255,255,0.2)",
+                                                fontSize: "0.75rem",
+                                            }}
+                                        >
+                                            {p.date}
+                                        </span>
+                                    </div>
+                                    <p
+                                        style={{
+                                            color: "rgba(255,255,255,0.48)",
+                                            fontSize: "0.875rem",
+                                            lineHeight: 1.6,
+                                            margin: "0 0 14px",
+                                        }}
+                                    >
+                                        {p.desc}
+                                    </p>
+                                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                                        {p.tags.map((t) => (
+                                            <span
+                                                key={t}
+                                                style={{
+                                                    ...glass(0.1, 10),
+                                                    borderRadius: 100,
+                                                    padding: "3px 11px",
+                                                    fontSize: "0.68rem",
+                                                    fontWeight: 600,
+                                                    color: "rgba(255,255,255,0.5)",
+                                                    letterSpacing: "0.04em",
+                                                }}
+                                            >
+                                                {t}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </GlassCard>
@@ -997,6 +965,25 @@ export default function App() {
 
                             <div
                                 style={{
+                                    borderRadius: 14,
+                                    border: "1px dashed rgba(255,255,255,0.16)",
+                                    background: "rgba(0,0,0,0.35)",
+                                    padding: 10,
+                                    marginBottom: 14,
+                                    minHeight: 120,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    color: "rgba(255,255,255,0.4)",
+                                    fontSize: "0.8rem",
+                                }}
+                            >
+                                Project video preview will appear here (assets/video...).
+                            </div>
+
+                            <div
+                                style={{
                                     display: "flex",
                                     gap: 10,
                                     flexWrap: "wrap",
@@ -1055,15 +1042,16 @@ export default function App() {
                                         target="_blank"
                                         rel="noreferrer noopener"
                                         style={{
-                                            padding: "8px 20px",
+                                            padding: "8px 18px",
                                             borderRadius: 999,
-                                            border: "1px solid rgba(255,255,255,0.35)",
-                                            color: "rgba(255,255,255,0.95)",
+                                            border: "1px solid rgba(255,255,255,0.25)",
+                                            color: "rgba(255,255,255,0.9)",
                                             fontSize: "0.85rem",
                                             textDecoration: "none",
                                             fontWeight: 500,
-                                            background:
-                                                "linear-gradient(135deg, rgba(0,0,0,0.45), rgba(0,0,0,0.7))",
+                                            background: "rgba(0,0,0,0.45)",
+                                            flex: activeProject.liveUrl ? "0 0 auto" : "1 1 100%",
+                                            textAlign: "center",
                                         }}
                                     >
                                         View on GitHub
@@ -1084,7 +1072,7 @@ export default function App() {
           top:26px;
           left:50%;
           transform:translateX(-50%);
-          max-width: min(100vw - 24px, 480px);
+          max-width:90vw;
         }
         @media (max-width:720px){
           .nav-pill{
@@ -1092,10 +1080,12 @@ export default function App() {
             bottom:18px;
             left:50%;
             transform:translateX(-50%);
+            padding:6px 10px;
+            gap:4px;
           }
           .nav-pill button{
-            padding:7px 12px;
-            font-size:0.78rem;
+            padding:7px 14px;
+            font-size:0.8rem;
           }
         }
         @keyframes avatarGlow{
