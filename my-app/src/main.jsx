@@ -123,11 +123,8 @@ const Nav = ({ active, setActive }) => {
     const items = ["News", "About", "Projects", "Support"];
     return (
         <nav
+            className="nav-pill"
             style={{
-                position: "fixed",
-                top: 26,
-                left: "50%",
-                transform: "translateX(-50%)",
                 zIndex: 1000,
                 display: "flex",
                 gap: 2,
@@ -421,31 +418,52 @@ const AboutSection = () => {
 };
 
 /* ─── PROJECTS ─── */
-const ProjectsSection = () => {
+const ProjectsSection = ({ onOpenProject }) => {
     const projects = [
         {
-            title: "Mentor AI",
-            desc: "Similarity-based mentor AI — evaluates question-answer relevance with lightweight NLP.",
-            date: "Oct 20, 2025",
-            href: "https://github.com/shvde12/MENTOR-AI",
-            tags: ["NLP", "Python", "AI"],
+            title: "Wapp",
+            desc: "Web tool for measuring and comparing visual ratios.",
+            date: "2026",
+            tags: ["Web", "Ratios"],
             num: "01",
+            liveUrl: null,
+            githubUrl: null,
         },
         {
             title: "chlvk.com",
             desc: "The portfolio you're currently exploring — minimal, fast, design-focused.",
             date: "Oct 15, 2025",
-            href: null,
             tags: ["React", "Design", "Web"],
             num: "02",
+            liveUrl: "https://chlvk.com",
+            githubUrl: "https://github.com/chelovekeo/chlvk.com",
         },
         {
             title: "Taskflow",
             desc: "Telegram bot for structuring and tracking tasks in compact flows.",
             date: "Jan 2, 2026",
-            href: null,
             tags: ["Telegram bot", "Productivity"],
             num: "03",
+            liveUrl: null,
+            githubUrl: null,
+        },
+        {
+            title: "Frontend collection",
+            desc: "Small front-end experiments and site concepts collected in one place.",
+            date: "2025",
+            tags: ["Frontend", "Archive"],
+            num: "04",
+            liveUrl: null,
+            githubUrl: null,
+        },
+        {
+            title: "Pascal collection",
+            desc: "Set of Pascal utilities and early experiments.",
+            date: "2018–2020",
+            tags: ["Pascal", "Legacy"],
+            num: "05",
+            liveUrl: null,
+            githubUrl: null,
         },
     ];
     return (
@@ -465,7 +483,10 @@ const ProjectsSection = () => {
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {projects.map((p) => {
                     const card = (
-                        <GlassCard style={{ padding: "22px 26px 20px" }}>
+                        <GlassCard
+                            style={{ padding: "22px 26px 20px" }}
+                            onClick={() => onOpenProject && onOpenProject(p)}
+                        >
                             <div style={{ display: "flex", alignItems: "flex-start", gap: 18 }}>
                                 <span
                                     style={{
@@ -542,34 +563,10 @@ const ProjectsSection = () => {
                                         ))}
                                     </div>
                                 </div>
-                                {p.href && (
-                                    <span
-                                        style={{
-                                            color: "rgba(255,255,255,0.22)",
-                                            fontSize: "1.1rem",
-                                            flexShrink: 0,
-                                            marginTop: 2,
-                                        }}
-                                    >
-                                        ↗
-                                    </span>
-                                )}
                             </div>
                         </GlassCard>
                     );
-                    return p.href ? (
-                        <a
-                            key={p.num}
-                            href={p.href}
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            style={{ textDecoration: "none" }}
-                        >
-                            {card}
-                        </a>
-                    ) : (
-                        <div key={p.num}>{card}</div>
-                    );
+                    return <div key={p.num}>{card}</div>;
                 })}
             </div>
         </section>
@@ -715,6 +712,7 @@ export default function App() {
     const [active, setActive] = useState("News");
     const [mounted, setMounted] = useState(false);
     const [fading, setFading] = useState(false);
+    const [activeProject, setActiveProject] = useState(null);
 
     useEffect(() => {
         setTimeout(() => setMounted(true), 80);
@@ -732,7 +730,7 @@ export default function App() {
     const sections = {
         News: <NewsSection />,
         About: <AboutSection />,
-        Projects: <ProjectsSection />,
+        Projects: <ProjectsSection onOpenProject={setActiveProject} />,
         Support: <SupportSection />,
     };
 
@@ -829,14 +827,211 @@ export default function App() {
                     {sections[active]}
                 </div>
 
+                {activeProject && (
+                    <div
+                        style={{
+                            position: "fixed",
+                            inset: 0,
+                            zIndex: 1200,
+                            background: "rgba(0,0,0,0.5)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: 16,
+                        }}
+                        onClick={() => setActiveProject(null)}
+                    >
+                        <div
+                            style={{
+                                maxWidth: 520,
+                                width: "100%",
+                                borderRadius: 20,
+                                ...glass(0.16, 30),
+                                padding: "22px 22px 18px",
+                                boxShadow: "0 18px 60px rgba(0,0,0,0.65)",
+                                animation: "modalIn 0.24s ease-out",
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "flex-start",
+                                    gap: 12,
+                                    marginBottom: 12,
+                                }}
+                            >
+                                <div>
+                                    <div
+                                        style={{
+                                            fontSize: "0.72rem",
+                                            letterSpacing: "0.12em",
+                                            textTransform: "uppercase",
+                                            color: "rgba(255,255,255,0.45)",
+                                            marginBottom: 4,
+                                        }}
+                                    >
+                                        Project
+                                    </div>
+                                    <h3
+                                        style={{
+                                            fontFamily: "-apple-system, sans-serif",
+                                            fontSize: "1.25rem",
+                                            fontWeight: 700,
+                                            color: "#fff",
+                                            margin: 0,
+                                            letterSpacing: "-0.02em",
+                                        }}
+                                    >
+                                        {activeProject.title}
+                                    </h3>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => setActiveProject(null)}
+                                    style={{
+                                        background: "transparent",
+                                        border: "none",
+                                        color: "rgba(255,255,255,0.45)",
+                                        cursor: "pointer",
+                                        fontSize: "1.1rem",
+                                        lineHeight: 1,
+                                        padding: 4,
+                                    }}
+                                >
+                                    ×
+                                </button>
+                            </div>
+
+                            <div
+                                style={{
+                                    borderRadius: 14,
+                                    border: "1px solid rgba(255,255,255,0.1)",
+                                    background:
+                                        "radial-gradient(circle at top, rgba(255,255,255,0.06), transparent 55%)",
+                                    padding: 14,
+                                    marginBottom: 14,
+                                }}
+                            >
+                                <p
+                                    style={{
+                                        color: "rgba(255,255,255,0.65)",
+                                        fontSize: "0.9rem",
+                                        lineHeight: 1.7,
+                                        margin: 0,
+                                    }}
+                                >
+                                    {activeProject.desc}
+                                </p>
+                            </div>
+
+                            <div
+                                style={{
+                                    display: "flex",
+                                    gap: 10,
+                                    flexWrap: "wrap",
+                                    marginBottom: 10,
+                                }}
+                            >
+                                {activeProject.tags?.map((t) => (
+                                    <span
+                                        key={t}
+                                        style={{
+                                            ...glass(0.12, 18),
+                                            borderRadius: 999,
+                                            padding: "3px 10px",
+                                            fontSize: "0.72rem",
+                                            color: "rgba(255,255,255,0.7)",
+                                            letterSpacing: "0.08em",
+                                            textTransform: "uppercase",
+                                        }}
+                                    >
+                                        {t}
+                                    </span>
+                                ))}
+                            </div>
+
+                            <div
+                                style={{
+                                    display: "flex",
+                                    gap: 10,
+                                    flexWrap: "wrap",
+                                    marginTop: 6,
+                                }}
+                            >
+                                <a
+                                    href={activeProject.liveUrl || undefined}
+                                    target="_blank"
+                                    rel={activeProject.liveUrl ? "noreferrer noopener" : undefined}
+                                    style={{
+                                        pointerEvents: activeProject.liveUrl ? "auto" : "none",
+                                        opacity: activeProject.liveUrl ? 1 : 0.45,
+                                        padding: "8px 16px",
+                                        borderRadius: 999,
+                                        border: "1px solid rgba(255,255,255,0.35)",
+                                        color: "#fff",
+                                        fontSize: "0.85rem",
+                                        textDecoration: "none",
+                                        fontWeight: 500,
+                                        background:
+                                            "linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03))",
+                                    }}
+                                >
+                                    Visit project
+                                </a>
+                                <a
+                                    href={activeProject.githubUrl || undefined}
+                                    target="_blank"
+                                    rel={
+                                        activeProject.githubUrl ? "noreferrer noopener" : undefined
+                                    }
+                                    style={{
+                                        pointerEvents: activeProject.githubUrl ? "auto" : "none",
+                                        opacity: activeProject.githubUrl ? 1 : 0.45,
+                                        padding: "8px 16px",
+                                        borderRadius: 999,
+                                        border: "1px solid rgba(255,255,255,0.25)",
+                                        color: "rgba(255,255,255,0.9)",
+                                        fontSize: "0.85rem",
+                                        textDecoration: "none",
+                                        fontWeight: 500,
+                                        background: "rgba(0,0,0,0.35)",
+                                    }}
+                                >
+                                    View on GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
             </main>
 
             <style>{`
         *{box-sizing:border-box;margin:0;padding:0}
         html,body{margin:0;background:#080809;scroll-behavior:smooth}
+        .nav-pill{
+          position:fixed;
+          top:26px;
+          left:50%;
+          transform:translateX(-50%);
+        }
+        @media (max-width:720px){
+          .nav-pill{
+            top:auto;
+            bottom:18px;
+            left:50%;
+            transform:translateX(-50%);
+          }
+        }
         @keyframes avatarGlow{
           0%,100%{box-shadow:0 0 40px rgba(255,255,255,0.08),inset 0 1px 0 rgba(255,255,255,0.3)}
           50%{box-shadow:0 0 60px rgba(255,255,255,0.14),inset 0 1px 0 rgba(255,255,255,0.4)}
+        }
+        @keyframes modalIn{
+          from{opacity:0;transform:translateY(12px) scale(0.97)}
+          to{opacity:1;transform:translateY(0) scale(1)}
         }
       `}</style>
         </div>
