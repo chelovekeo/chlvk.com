@@ -291,11 +291,6 @@ const AboutSection = () => {
             style: { background: "#1a1a1a", border: "2px solid rgba(255,255,255,0.15)" },
         },
     ];
-    const stats = [
-        { label: "Projects", val: "2+" },
-        { label: "Repos", val: "4+" },
-        { label: "Since", val: "2025" },
-    ];
     return (
         <section>
             <h2
@@ -310,113 +305,7 @@ const AboutSection = () => {
             >
                 About Me
             </h2>
-            <GlassCard hover={false} style={{ padding: "28px 30px", marginBottom: 16 }}>
-                <div
-                    style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        height: 1,
-                        background:
-                            "linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)",
-                        borderRadius: "20px 20px 0 0",
-                    }}
-                />
-                <div
-                    style={{
-                        display: "grid",
-                        gap: 14,
-                        margin: "0 0 24px",
-                        maxWidth: 520,
-                    }}
-                >
-                    <p
-                        style={{
-                            color: "rgba(255,255,255,0.62)",
-                            fontSize: "1.02rem",
-                            lineHeight: 1.7,
-                            margin: 0,
-                        }}
-                    >
-                        I work at the intersection of engineering and design — turning rough ideas
-                        into precise, minimal interfaces and small tools that actually ship.
-                    </p>
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            gap: 8,
-                        }}
-                    >
-                        {[
-                            "Product thinking",
-                            "Interface design",
-                            "Fast frontends",
-                            "Small tools & bots",
-                        ].map((item) => (
-                            <span
-                                key={item}
-                                style={{
-                                    ...glass(0.12, 18),
-                                    borderRadius: 999,
-                                    padding: "4px 10px",
-                                    fontSize: "0.75rem",
-                                    color: "rgba(255,255,255,0.7)",
-                                    letterSpacing: "0.08em",
-                                    textTransform: "uppercase",
-                                }}
-                            >
-                                {item}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-                <div
-                    style={{
-                        display: "flex",
-                        gap: 0,
-                        borderTop: "1px solid rgba(255,255,255,0.08)",
-                        paddingTop: 20,
-                    }}
-                >
-                    {stats.map((s, i) => (
-                        <div
-                            key={i}
-                            style={{
-                                flex: 1,
-                                textAlign: "center",
-                                borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none",
-                            }}
-                        >
-                            <div
-                                style={{
-                                    fontFamily: "-apple-system, sans-serif",
-                                    fontSize: "1.6rem",
-                                    fontWeight: 700,
-                                    color: "#fff",
-                                    letterSpacing: "-0.03em",
-                                }}
-                            >
-                                {s.val}
-                            </div>
-                            <div
-                                style={{
-                                    fontSize: "0.7rem",
-                                    color: "rgba(255,255,255,0.32)",
-                                    letterSpacing: "0.1em",
-                                    textTransform: "uppercase",
-                                    marginTop: 3,
-                                }}
-                            >
-                                {s.label}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </GlassCard>
-
-            {/* Original-style social pill buttons */}
+            {/* Socials only */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
                 {socials.map((s, i) => (
                     <a
@@ -465,6 +354,7 @@ const ProjectsSection = ({ onOpenProject }) => {
             num: "01",
             liveUrl: null,
             githubUrl: null,
+            videoSrc: "/assets/video-wapp.mp4",
         },
         {
             title: "Pascal collection",
@@ -473,7 +363,8 @@ const ProjectsSection = ({ onOpenProject }) => {
             tags: ["Pascal", "Legacy"],
             num: "02",
             liveUrl: null,
-            githubUrl: null,
+            githubUrl: "https://github.com/chelovekeo/pascal",
+            videoSrc: "/assets/video-pascal.mp4",
         },
         {
             title: "Frontend collection",
@@ -482,7 +373,8 @@ const ProjectsSection = ({ onOpenProject }) => {
             tags: ["Frontend", "Archive"],
             num: "03",
             liveUrl: null,
-            githubUrl: null,
+            githubUrl: "https://github.com/chelovekeo/front",
+            videoSrc: "/assets/video-front.mp4",
         },
         {
             title: "chlvk.com",
@@ -492,6 +384,7 @@ const ProjectsSection = ({ onOpenProject }) => {
             num: "04",
             liveUrl: "https://chlvk.com",
             githubUrl: "https://github.com/chelovekeo/chlvk.com",
+            videoSrc: "/assets/video-chlvk.mp4",
         },
         {
             title: "Taskflow",
@@ -501,6 +394,7 @@ const ProjectsSection = ({ onOpenProject }) => {
             num: "05",
             liveUrl: null,
             githubUrl: null,
+            videoSrc: "/assets/video-taskflow.mp4",
         },
     ];
     return (
@@ -963,24 +857,50 @@ export default function App() {
                                 </p>
                             </div>
 
-                            <div
-                                style={{
-                                    borderRadius: 14,
-                                    border: "1px dashed rgba(255,255,255,0.16)",
-                                    background: "rgba(0,0,0,0.35)",
-                                    padding: 10,
-                                    marginBottom: 14,
-                                    minHeight: 120,
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    textAlign: "center",
-                                    color: "rgba(255,255,255,0.4)",
-                                    fontSize: "0.8rem",
-                                }}
-                            >
-                                Project video preview will appear here (assets/video...).
-                            </div>
+                            {activeProject.videoSrc ? (
+                                <div
+                                    style={{
+                                        borderRadius: 14,
+                                        border: "1px solid rgba(255,255,255,0.18)",
+                                        overflow: "hidden",
+                                        marginBottom: 14,
+                                        background: "rgba(0,0,0,0.5)",
+                                    }}
+                                >
+                                    <video
+                                        src={activeProject.videoSrc}
+                                        style={{
+                                            width: "100%",
+                                            display: "block",
+                                            maxHeight: 260,
+                                            objectFit: "cover",
+                                        }}
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                    />
+                                </div>
+                            ) : (
+                                <div
+                                    style={{
+                                        borderRadius: 14,
+                                        border: "1px dashed rgba(255,255,255,0.16)",
+                                        background: "rgba(0,0,0,0.35)",
+                                        padding: 10,
+                                        marginBottom: 14,
+                                        minHeight: 120,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        textAlign: "center",
+                                        color: "rgba(255,255,255,0.4)",
+                                        fontSize: "0.8rem",
+                                    }}
+                                >
+                                    Project video preview will appear here.
+                                </div>
+                            )}
 
                             <div
                                 style={{
@@ -1076,10 +996,6 @@ export default function App() {
         }
         @media (max-width:720px){
           .nav-pill{
-            top:auto;
-            bottom:18px;
-            left:50%;
-            transform:translateX(-50%);
             padding:6px 10px;
             gap:4px;
           }
