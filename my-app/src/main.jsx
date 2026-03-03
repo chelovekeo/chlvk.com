@@ -305,7 +305,16 @@ const AboutSection = () => {
             >
                 About Me
             </h2>
-            {/* Socials only */}
+            <p
+                style={{
+                    color: "rgba(255,255,255,0.45)",
+                    fontSize: "0.9rem",
+                    marginBottom: 18,
+                    maxWidth: 420,
+                }}
+            >
+                A small hub for how to reach me and follow what I&apos;m building.
+            </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
                 {socials.map((s, i) => (
                     <a
@@ -996,6 +1005,10 @@ export default function App() {
         }
         @media (max-width:720px){
           .nav-pill{
+            top:auto;
+            bottom:18px;
+            left:50%;
+            transform:translateX(-50%);
             padding:6px 10px;
             gap:4px;
           }
